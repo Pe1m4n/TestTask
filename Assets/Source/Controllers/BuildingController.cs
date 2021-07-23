@@ -60,8 +60,8 @@ namespace Controllers
             {
                 var building = _state.Buildings[i];
 
-                if (x >= building.X && y >= building.Y && x <= building.X + building.Width - 1 &&
-                    y <= building.Y + building.Height - 1)
+                if (x >= building.X && y >= building.Y && x < building.X + building.Width &&
+                    y < building.Y + building.Height)
                 {
                     _state.Buildings.RemoveAt(i);
                     return;
