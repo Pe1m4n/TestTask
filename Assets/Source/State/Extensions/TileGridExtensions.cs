@@ -4,9 +4,9 @@ namespace State.Extensions
 {
     public static class TileGridExtensions
     {
-        public static bool IsTileEmpty(this TileGrid tileGrid, int x, int y)
+        public static bool IsTileEmpty(this TileGridState tileGridState, int x, int y)
         {
-            if (tileGrid.TryGetTile(x, y, out var tile))
+            if (tileGridState.TryGetTile(x, y, out var tile))
             {
                 return !tile.Occupied;
             }
@@ -15,20 +15,20 @@ namespace State.Extensions
             return false;
         }
 
-        public static bool IsValidCoordinates(this TileGrid tileGrid, int x, int y)
+        public static bool IsValidCoordinates(this TileGridState tileGridState, int x, int y)
         {
-            return !(x < 0 || y < 0 || x >= tileGrid.Width || y >= tileGrid.Height);
+            return !(x < 0 || y < 0 || x >= tileGridState.Width || y >= tileGridState.Height);
         }
 
-        private static bool TryGetTile(this TileGrid tileGrid, int x, int y, out Tile tile)
+        private static bool TryGetTile(this TileGridState tileGridState, int x, int y, out TileState tileState)
         {
-            tile = null;
-            if (!tileGrid.IsValidCoordinates(x, y))
+            tileState = null;
+            if (!tileGridState.IsValidCoordinates(x, y))
             {
                 return false;
             }
 
-            tile = tileGrid.Tiles[x, y];
+            tileState = tileGridState.Tiles[x, y];
             return true;
         }
     }

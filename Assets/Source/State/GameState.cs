@@ -4,12 +4,12 @@ namespace State
 {
     public class GameState
     {
-        public TileGrid TileGrid { get; }
-        public List<Building> Buildings { get; } = new List<Building>();
+        public TileGridState TileGridState { get; }
+        public List<BuildingState> Buildings { get; } = new List<BuildingState>();
 
         public GameState(int gridWidth, int gridHeight)
         {
-            TileGrid = new TileGrid(gridWidth, gridHeight);
+            TileGridState = new TileGridState(gridWidth, gridHeight);
         }
     }
 }

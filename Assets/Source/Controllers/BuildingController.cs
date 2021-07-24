@@ -18,12 +18,12 @@ namespace Controllers
             for (int targetX = x; targetX < x + buildingWidth; targetX++)
             for (int targetY = y; targetY < y + buildingHeight; targetY++)
             {
-                if (!_state.TileGrid.IsValidCoordinates(targetX, targetY))
+                if (!_state.TileGridState.IsValidCoordinates(targetX, targetY))
                 {
                     return false;
                 }
 
-                if (!_state.TileGrid.IsTileEmpty(targetX, targetY))
+                if (!_state.TileGridState.IsTileEmpty(targetX, targetY))
                 {
                     return false;
                 }
@@ -43,15 +43,15 @@ namespace Controllers
             for (int targetX = x; targetX < x + buildingWidth; targetX++)
             for (int targetY = y; targetY < y + buildingHeight; targetY++)
             {
-                _state.TileGrid.Tiles[targetX, targetY].Occupied = true;
+                _state.TileGridState.Tiles[targetX, targetY].Occupied = true;
             }
             
-            _state.Buildings.Add(new Building(x, y, buildingWidth, buildingHeight));
+            _state.Buildings.Add(new BuildingState(x, y, buildingWidth, buildingHeight));
         }
 
         public void RemoveBuildingAt(int x, int y)
         {
-            if (!_state.TileGrid.IsValidCoordinates(x, y))
+            if (!_state.TileGridState.IsValidCoordinates(x, y))
             {
                 return;
             }
@@ -64,6 +64,7 @@ namespace Controllers
                     y < building.Y + building.Height)
                 {
                     _state.Buildings.RemoveAt(i);
+                    //TODO: make tiles empty
                     return;
                 }
             }
